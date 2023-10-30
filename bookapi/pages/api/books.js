@@ -7,20 +7,5 @@ export default function handler(req, res) {
     const fileData = fs.readFileSync(filePath);
     const data = JSON.parse(fileData);
     res.status(200).json({ message: data });
-  } else if (req.method === "POST") {
-    const { title, author } = req.body;
-    const newBook = {
-      id: new Date().toISOString(),
-      title,
-      author,
-    };
-    const filePath = path.join(process.cwd(), "data", "books.json");
-    const jsonData = fs.readFileSync(filePath);
-    const books = JSON.parse(jsonData);
-    books.push(newBook);
-    fs.writeFileSync(filePath, JSON.stringify(books));
-    res.status(201).json(newBook);
-  } else {
-    res.status(405).json({ message: "We only support GET and POST" });
   }
 }
