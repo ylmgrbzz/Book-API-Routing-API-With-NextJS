@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [name, setName] = useState("");
-  const data = fetch("http://localhost:3000/api/hello")
+  const data = fetch("http://localhost:3000/api/books")
     .then((response) => response.json())
     .then((data) => setName(data.name));
   return (
