@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import BookItem from "./BookItem";
 
 const BooksList = () => {
   const [data, setData] = useState([]);
@@ -20,10 +21,15 @@ const BooksList = () => {
     <div>
       <ul>
         {data &&
-          data.map((book) => (
-            <li key={book.id}>
-              {book.title} - {book.description}
-            </li>
+          data.map((item,index) => (
+            <BookItem
+            description={item.description}
+            name={item.name}
+            id={item.id}
+            imgUrl={item.imgUrl}
+            key={index}
+            />
+            
           ))}
       </ul>
     </div>

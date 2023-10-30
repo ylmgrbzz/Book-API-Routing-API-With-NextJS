@@ -4,9 +4,8 @@ import path from "path";
 export default function handler(req, res) {
   if (req.method === "GET") {
     const filePath = path.join(process.cwd(), "data", "books.json");
-    const jsonData = fs.readFileSync(filePath);
-    const data = JSON.parse(jsonData);
-    console.log(books);
+    const fileData = fs.readFileSync(filePath);
+    const data = JSON.parse(fileData);
     res.status(200).json({ message: data });
   } else if (req.method === "POST") {
     const { title, author } = req.body;
