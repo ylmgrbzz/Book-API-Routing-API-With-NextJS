@@ -7,3 +7,5 @@ const BookItem = ({ name, description, id, imgUrl }) => {
     </li>
   );
 };
+
+export default BookItem;

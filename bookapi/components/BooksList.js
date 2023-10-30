@@ -3,25 +3,30 @@ import BookItem from "./BookItem";
 
 const BooksList = () => {
   const [data, setData] = useState([]);
-  const sendRequest = () => {
-    fetch("/api/books")
-      .then((response) => response.json())
-      .then((data) => setData(data.message))
-      .catch((error) => {
-        console.log("Error:", error);
-      });
+
+  const sendRequest = async () => {
+    try {
+      const response = await fetch("/api/books");
+      if (response.ok) {
+        const result = await response.json();
+        setData(result);
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
   useEffect(() => {
-    return () => {
-      sendRequest();
-    };
+    sendRequest();
   }, []);
 
   return (
     <div>
       <ul>
-        {data &&
-          data.map((item, index) => (
+        {data.message &&
+          data.message.map((item, index) => (
             <BookItem
               description={item.description}
               name={item.name}
