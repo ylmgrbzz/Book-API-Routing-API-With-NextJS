@@ -28,6 +28,16 @@ export default async function handler(req, res) {
       .json({ message: "Books fetched", books: booksCollection });
     // getData();
   } else if (req.method === "POST") {
+    if (
+      !name &&
+      name.trim() === "" &&
+      !description &&
+      description.trim() === "" &&
+      !imgUrl &&
+      imgUrl.trim() === ""
+    ) {
+      return res.status(422).json({ message: "Invalid input" });
+    }
     const { imgUrl, name, description } = req.body;
     const newBook = {
       id: Math.random().toString(),
@@ -35,7 +45,15 @@ export default async function handler(req, res) {
       name,
       description,
     };
-    const generateBooks = await db.collection("books").insertOne(newBook);
+    let generateBooks;
+    try {
+      const generateBooks = await db.collection("books").insertOne(newBook);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    if (!generateBooks) {
+      return res.status(404).json({ message: "No books found" });
+    }
 
     // const filePath = path.join(process.cwd(), "data", "books.json");
     // const data = getData();
