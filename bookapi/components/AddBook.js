@@ -24,28 +24,23 @@ const AddBook = () => {
     }
   };
 
-  const sendRequest = async () => {
-    try {
-      const response = await fetch("/api/books", {
-        method: "POST",
-        body: JSON.stringify({
-          name: inputs.name,
-          description: inputs.description,
-          imgUrl: inputs.imgUrl,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+  const sendRequest = () => {
+    fetch("/api/books/", {
+      method: "POST",
+      body: JSON.stringify({
+        name: inputs.name,
+        description: inputs.description,
+        imgUrl: inputs.imgUrl,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((data) => {
+        console.log(data);
+        alert(data.message);
       });
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
-      } else {
-        console.error("Error:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    });
   };
 
   return (
