@@ -18,6 +18,31 @@ const AddBook = () => {
     e.preventDefault();
     console.log(inputs);
   };
+
+  const sendRequest = async () => {
+    try {
+      const response = await fetch("/api/books", {
+        method: "POST",
+        body: JSON.stringify({
+          name: inputs.name,
+          description: inputs.description,
+          imgUrl: inputs.imgUrl,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.formControl}>
