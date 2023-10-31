@@ -1,4 +1,4 @@
-import "./BookItem.css";
+import styles from "../styles/Books.module.css"
 const BookItem = ({ name, description, id, imgUrl }) => {
   return (
     <li className={styles.listItem}>

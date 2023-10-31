@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BookItem from "./BookItem";
-import styles from "./BooksList.module.css";
-
+import styles from "../styles/Books.module.css"
 const BooksList = () => {
   const [data, setData] = useState([]);
 
