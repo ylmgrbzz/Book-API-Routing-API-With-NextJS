@@ -8,16 +8,18 @@ function getData() {
   res.status(200).json({ message: data });
 }
 
-function postData() {
+function postData(req, res) {
   const { imgUrl, name, description } = req.body;
-  const data = getData();
   const newBook = {
     id: Math.random().toString(),
     imgUrl,
     name,
     description,
   };
+  const filePath = path.join(process.cwd(), "data", "books.json");
+  const data = getData();
   data.push(newBook);
+  fs.writeFileSync(filePath, JSON.stringify(data));
   return res
     .status(201)
     .json({ message: "Book added successfully!", book: newBook });

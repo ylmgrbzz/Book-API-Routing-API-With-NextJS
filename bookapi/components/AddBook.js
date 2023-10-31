@@ -17,6 +17,11 @@ const AddBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
+    if (inputs.name && inputs.description && inputs.imgUrl) {
+      sendRequest();
+    } else {
+      alert("Please fill in all fields");
+    }
   };
 
   const sendRequest = async () => {
