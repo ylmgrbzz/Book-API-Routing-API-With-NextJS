@@ -1,9 +1,10 @@
 import React from "react";
+import styles from "../styles/Form.module.css"
 
 const AddBook = () => {
   return (
-    <div>
-      <form>
+    <div className={styles.container}   >  
+      <form  className={styles.formControl}     >
         <label htmlFor="name"> name</label> <input type="text" name="name" />
         <label htmlFor="description"> description</label>{" "}
         <input type="text" name="description" />
