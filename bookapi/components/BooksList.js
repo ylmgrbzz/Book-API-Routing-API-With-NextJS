@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BookItem from "./BookItem";
+import styles from "./BooksList.module.css";
 
 const BooksList = () => {
   const [data, setData] = useState([]);
@@ -23,8 +24,8 @@ const BooksList = () => {
   }, []);
 
   return (
-    <div>
-      <ul>
+    <div   >
+      <ul className={styles.listContainer} >
         {data.message &&
           data.message.map((item, index) => (
             <BookItem
